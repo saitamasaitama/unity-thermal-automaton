@@ -20,7 +20,7 @@ public class ThermalMachine : MonoBehaviour
         {
             GameObject o = GameObject.CreatePrimitive(PrimitiveType.Cube);
             o.transform.position = 
-                (Vector3.up * (y + 1) * 1.5f) + 
+                (Vector3.up * (y + 1) * 1.7f) + 
                 (Vector3.left * (x -5)
             );
             Rigidbody rigidbody= o.AddComponent<Rigidbody>();
@@ -34,10 +34,9 @@ public class ThermalMachine : MonoBehaviour
             o.GetComponent<Renderer>().material = new Material(Shader.Find("Unlit/Color"));
 
             ThermalBlock thermal=o.AddComponent<ThermalBlock>();
-            thermal.Kelvin=UnityEngine.Random.Range(0,1000);
 
-            
 
+            thermal.Kelvin=UnityEngine.Random.Range(0,500);
         });
     }
 }

@@ -18,12 +18,12 @@ public class ThermalBlock : MonoBehaviour
   public float mass=10*10*10;
   
   //熱伝導率(1mあたり W)
-  public float thermalConductivity = 1000;
+  public float thermalConductivity = 500;
 
 //1w＝1/（4.184×時間［s］）cal
 //1cal＝（4.184×時間［s］）w
   
-  public static float Watt2cal(float w,float delta)=>w*delta*4.184f;
+  
 
   public float Kelvin{
     set{
@@ -61,20 +61,18 @@ public class ThermalBlock : MonoBehaviour
       
       //熱伝導率を 1K = 1Secとする
       if(A.Kelvin < B.Kelvin){
-        float cal= Watt2cal(A.thermalConductivity,delta);  
+        float cal= Thermal.Watt2cal(A.thermalConductivity,delta);  
         //Aに対して熱が送られる
         A.calorie += cal;
         B.calorie -= cal;        
       }
 
       else if(B.Kelvin < A.Kelvin){
-        float cal= Watt2cal(B.thermalConductivity,delta);  
+        float cal= Thermal.Watt2cal(B.thermalConductivity,delta);  
         //Bに対して熱が送られる
         B.calorie += cal;
         A.calorie -= cal;        
       }
-
-
     }
 
     void OnCollisionEnter(Collision other){
@@ -92,7 +90,6 @@ public class ThermalBlock : MonoBehaviour
       if(o!=null){
         contacts.Remove(o);
       }
-
     }
 
     public static ThermalBlock operator + (ThermalBlock A,ThermalBlock B){
